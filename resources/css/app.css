@@ -2,10 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    width: 600px;
-    margin: auto;
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 5px;
 }
-p {
-    line-height: 1.8rem;
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 20px;
 }

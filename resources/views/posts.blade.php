@@ -1,12 +1,20 @@
-<x-layout title="Posts | Blog">
-    <main class="flex flex-col gap-5 py-24">
-        @foreach ($posts as $post)
-            <a href="/posts/{{ $post->slug }}">
-                <article class="p-5 text-base bg-orange-100 shadow-lg rounded">
-                    <h1 class="text-3xl font-bold">{{ $post->title }}</h1>
-                    <q class="text-gray-700"><i>{{ $post->desc }}</i></q>
-                </article>
-            </a>
-        @endforeach
+<x-layout>
+    @include('_posts-header')
+
+    <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+
+        @if ($posts->count())
+            <x-post-featured-card :post="$posts[0]" />
+            @if ($posts->count() > 1)
+                <div class="lg:grid lg:grid-cols-6">
+                    @foreach ($posts->skip(1) as $post)
+                        <x-post-card :post="$post"
+                            class="{{ $loop->iteration < 3 ? 'col-span-3' : 'col-span-2' }}" />
+                    @endforeach
+                </div>
+            @endif
+        @else
+            <p>No posts yet. Please check back later</p>
+        @endif
     </main>
 </x-layout>
